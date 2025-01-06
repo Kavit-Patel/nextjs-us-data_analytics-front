@@ -4,7 +4,6 @@ import { useUserLogin, useUserLogOut } from "@/lib/query";
 import { usePathname, useRouter } from "next/navigation";
 import { MdMenu } from "react-icons/md";
 import Loader from "./Loader";
-import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -64,8 +63,7 @@ const Navbar = () => {
               <div className="flex items-center space-x-4">
                 <button
                   onClick={() => {
-                    toast.success("Feature under development!");
-                    router.push("/analytics");
+                    router.push("/analytics/all");
                   }}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg w-24 hover:bg-blue-600 transition"
                 >
@@ -123,8 +121,7 @@ const Navbar = () => {
                 </div>
                 <button
                   onClick={() => {
-                    toast.success("Feature under development!");
-                    router.push("/analytics");
+                    router.push("/analytics/all");
                   }}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
                 >

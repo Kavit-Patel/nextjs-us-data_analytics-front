@@ -1,14 +1,18 @@
 "use client";
 import Home from "@/app/page";
-import { IUser } from "@/types";
-import { useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import { useUserLogin } from "@/lib/query";
 import MyAnalytics from "@/ui/MyAnalytics-Ui";
-
-const MyUrlsFeature = () => {
-  const queryClient = useQueryClient();
-  const user: IUser | undefined = queryClient.getQueryData(["user"]);
-  return user ? <MyAnalytics /> : <Home />;
+import React from "react";
+const MyAnalyticsFeature = ({ alias }: { alias: string }) => {
+  const { data: user } = useUserLogin();
+  const topics = user
+    ? [...new Set(user.urls.map((url) => url.topic.name))]
+    : [];
+  return user ? (
+    <MyAnalytics alias={alias} user={user} topics={topics} />
+  ) : (
+    <Home />
+  );
 };
 
-export default MyUrlsFeature;
+export default MyAnalyticsFeature;

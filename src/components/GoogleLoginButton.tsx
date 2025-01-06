@@ -1,14 +1,24 @@
 "use client";
 
-import React from "react";
+import { useUserLogin } from "@/lib/query";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const GoogleLoginButton = () => {
+  const { data: user } = useUserLogin();
+  const router = useRouter();
   const googleAuthUrl = process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL;
 
   if (!googleAuthUrl) {
     console.error("Google authentication URL is not defined.");
   }
-
+  useEffect(() => {
+    if (user && user.id) {
+      toast("Logged In !");
+      router.push("/");
+    }
+  }, [router, user]);
   return (
     <a
       href={googleAuthUrl || "#"}
@@ -21,20 +31,3 @@ const GoogleLoginButton = () => {
 };
 
 export default GoogleLoginButton;
-
-// import Link from "next/link";
-
-// const GoogleLoginButton = () => {
-//   const googleauth = process.env.NEXT_PUBLIC_GOOGLE_AUTH_URL;
-//   console.log("GA ", googleauth);
-//   return (
-//     <Link
-//       href={googleauth ? googleauth : "#"}
-//       className="w-full px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 flex justify-center items-center"
-//     >
-//       Login with Google
-//     </Link>
-//   );
-// };
-
-// export default GoogleLoginButton;
