@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { IUrl, IUser } from "@/types";
 import Link from "next/link";
 import { MdDelete } from "react-icons/md";
@@ -10,6 +10,7 @@ import Loader from "@/components/Loader";
 
 const MyUrlsUi = ({ user }: { user: IUser }) => {
   const { mutateAsync: deleteUrl, isPending } = useDeleteUrlById();
+  const [urlIdBeingDeleted, setUrlIdBeingDeleted] = useState<string>("");
   return (
     <div className="max-w-6xl mx-auto p-6 min-h-[calc(100vh-64px)]">
       <h1 className="text-3xl font-bold mb-8 text-center text-gray-600">
@@ -107,11 +108,15 @@ const MyUrlsUi = ({ user }: { user: IUser }) => {
                     <td className="px-3 py-4 text-center">
                       <button
                         disabled={isPending}
-                        onClick={async () => await deleteUrl(url.id)}
+                        onClick={async () => {
+                          setUrlIdBeingDeleted(url.id);
+                          await deleteUrl(url.id);
+                          setUrlIdBeingDeleted("");
+                        }}
                         className="text-red-900 hover:text-red-700 transition-colors"
                         title="Delete URL"
                       >
-                        {isPending ? (
+                        {isPending && urlIdBeingDeleted === url.id ? (
                           <Loader width={20} height={20} color="red" />
                         ) : (
                           <MdDelete size={20} />

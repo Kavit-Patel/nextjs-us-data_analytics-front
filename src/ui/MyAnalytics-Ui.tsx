@@ -77,7 +77,7 @@ const MyAnalytics = ({
       <PerfectScrollbar>
         <div className="w-full flex flex-col gap-2">
           {user?.urls?.length === 0 ? (
-            <p className="w-full h-96 text-center text-gray-500 text-lg flex flex-col justify-center items-center gap-2">
+            <p className="w-screen h-96 text-center text-gray-500 text-lg flex flex-col justify-center items-center gap-2">
               <span>
                 You haven’t shortened any URLs yet. Start creating some!
               </span>
