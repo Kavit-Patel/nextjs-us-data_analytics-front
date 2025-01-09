@@ -58,6 +58,24 @@ export const UrlVisualization = ({ data }: { data: ISingleUrlData }) => {
           OS Type Distribution
         </h2>
         <PieChart width={400} height={400} className="mx-auto">
+          <Tooltip
+            formatter={(value, name) => [`${value} clicks`, name]}
+            contentStyle={{
+              backgroundColor: "#f4f4f8",
+              borderRadius: "8px",
+              border: "1px solid #ddd",
+              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+            }}
+            itemStyle={{
+              color: "#333",
+              fontSize: "14px",
+              fontFamily: "'Arial', sans-serif",
+            }}
+            labelStyle={{
+              fontSize: "12px",
+              color: "#555",
+            }}
+          />
           <Pie
             data={data.osType}
             dataKey="uniqueClicks"
@@ -66,7 +84,6 @@ export const UrlVisualization = ({ data }: { data: ISingleUrlData }) => {
             cy="50%"
             outerRadius={120}
             fill="#82ca9d"
-            label={(entry) => `${entry.osName} (${entry.uniqueClicks})`}
           >
             {data.osType.map((_, index) => (
               <Cell

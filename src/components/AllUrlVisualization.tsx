@@ -10,11 +10,11 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-  Tooltip,
   Legend,
   PieChart,
   Pie,
   Cell,
+  Tooltip,
 } from "recharts";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "react-perfect-scrollbar/dist/css/styles.css";
@@ -92,6 +92,24 @@ export const AllUrlVisualization = ({ data }: { data: IAllUrlData }) => {
             OS Distribution
           </h3>
           <PieChart width={300} height={300}>
+            <Tooltip
+              formatter={(value, name) => [`${value} clicks`, name]}
+              contentStyle={{
+                backgroundColor: "#f4f4f8",
+                borderRadius: "8px",
+                border: "1px solid #ddd",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+              }}
+              itemStyle={{
+                color: "#333",
+                fontSize: "14px",
+                fontFamily: "'Arial', sans-serif",
+              }}
+              labelStyle={{
+                fontSize: "12px",
+                color: "#555",
+              }}
+            />
             <Pie
               data={osData}
               dataKey="value"
@@ -100,7 +118,6 @@ export const AllUrlVisualization = ({ data }: { data: IAllUrlData }) => {
               cy="50%"
               outerRadius={100}
               fill="#8884d8"
-              label
             >
               {osData.map((entry, index) => (
                 <Cell
@@ -116,6 +133,24 @@ export const AllUrlVisualization = ({ data }: { data: IAllUrlData }) => {
             Device Distribution
           </h3>
           <PieChart width={300} height={300}>
+            <Tooltip
+              formatter={(value, name) => [`${value} clicks`, name]}
+              contentStyle={{
+                backgroundColor: "#f4f4f8",
+                borderRadius: "8px",
+                border: "1px solid #ddd",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+              }}
+              itemStyle={{
+                color: "#333",
+                fontSize: "14px",
+                fontFamily: "'Arial', sans-serif",
+              }}
+              labelStyle={{
+                fontSize: "12px",
+                color: "#555",
+              }}
+            />
             <Pie
               data={deviceData}
               dataKey="value"
@@ -124,7 +159,6 @@ export const AllUrlVisualization = ({ data }: { data: IAllUrlData }) => {
               cy="50%"
               outerRadius={100}
               fill="#82ca9d"
-              label
             >
               {deviceData.map((_, index) => (
                 <Cell

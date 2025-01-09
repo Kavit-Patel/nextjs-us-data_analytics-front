@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useUserLogin, useUserLogOut } from "@/lib/query";
 import { usePathname, useRouter } from "next/navigation";
 import { MdMenu } from "react-icons/md";
@@ -9,6 +9,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const [isRouting, startTransition] = useTransition();
 
   const { data: user, refetch } = useUserLogin();
   const { mutateAsync, isPending: isLogOutPending } = useUserLogOut();
@@ -19,14 +20,19 @@ const Navbar = () => {
   }, [pathname, refetch, user]);
   const handleLogout = async () => {
     await mutateAsync();
-    router.push("/");
+    handleNavigation("/");
+  };
+  const handleNavigation = (path: string) => {
+    startTransition(() => {
+      router.push(path);
+    });
   };
   return (
     <header className="bg-gray-800 hover:bg-gray-900 shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div
           className="flex items-center space-x-2 cursor-pointer"
-          onClick={() => router.push("/")}
+          onClick={() => handleNavigation("/")}
         >
           <img
             src="/logo.png"
@@ -63,14 +69,16 @@ const Navbar = () => {
               <div className="flex items-center space-x-4">
                 <button
                   onClick={() => {
-                    router.push("/analytics/all");
+                    handleNavigation("/analytics/all");
                   }}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg w-24 hover:bg-blue-600 transition"
                 >
                   Analytics
                 </button>
                 <button
-                  onClick={() => router.push("/myurls")}
+                  onClick={() => {
+                    handleNavigation("/myurls");
+                  }}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg w-24 hover:bg-blue-600 transition"
                 >
                   My-Urls
@@ -93,7 +101,7 @@ const Navbar = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 setMenuOpen(false);
-                router.push("/login");
+                handleNavigation("/login");
               }}
               className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
             >
@@ -121,14 +129,16 @@ const Navbar = () => {
                 </div>
                 <button
                   onClick={() => {
-                    router.push("/analytics/all");
+                    handleNavigation("/analytics/all");
                   }}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
                 >
                   Analytics
                 </button>
                 <button
-                  onClick={() => router.push("/myurls")}
+                  onClick={() => {
+                    handleNavigation("/myurls");
+                  }}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
                 >
                   My-Urls
@@ -145,7 +155,7 @@ const Navbar = () => {
                 onClick={(e) => {
                   e.stopPropagation();
                   setMenuOpen(false);
-                  router.push("/login");
+                  handleNavigation("/login");
                 }}
                 className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
               >
@@ -153,6 +163,11 @@ const Navbar = () => {
               </button>
             )}
           </nav>
+        </div>
+      )}
+      {isRouting && (
+        <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+          <Loader width={50} height={50} color="white" />
         </div>
       )}
     </header>

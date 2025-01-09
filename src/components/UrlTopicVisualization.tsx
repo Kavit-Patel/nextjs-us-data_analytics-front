@@ -97,6 +97,24 @@ export const UrlTopicVisualization = ({ data }: { data: ITopicData }) => {
       </h2>
       <div className="flex justify-center items-center gap-8 mt-8">
         <PieChart width={300} height={300}>
+          <Tooltip
+            formatter={(value, name) => [`${value} clicks`, name]}
+            contentStyle={{
+              backgroundColor: "#f4f4f8",
+              borderRadius: "8px",
+              border: "1px solid #ddd",
+              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+            }}
+            itemStyle={{
+              color: "#333",
+              fontSize: "14px",
+              fontFamily: "'Arial', sans-serif",
+            }}
+            labelStyle={{
+              fontSize: "12px",
+              color: "#555",
+            }}
+          />
           <Pie
             data={data.urls}
             dataKey="uniqueClicks"

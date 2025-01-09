@@ -75,7 +75,7 @@ const MyAnalytics = ({
   return (
     <div className="w-full h-[calc(100vh-64px)] bg-gradient-to-b from-gray-900 to-blue-900 flex flex-col items-center text-xl">
       <PerfectScrollbar>
-        <div className="w-full flex flex-col gap-2">
+        <div className="w-screen flex flex-col gap-2">
           {user?.urls?.length === 0 ? (
             <p className="w-screen h-96 text-center text-gray-500 text-lg flex flex-col justify-center items-center gap-2">
               <span>
