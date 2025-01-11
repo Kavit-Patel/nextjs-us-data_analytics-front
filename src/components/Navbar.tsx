@@ -89,7 +89,7 @@ const Navbar = () => {
                   className="bg-red-500 text-white px-4 py-2 rounded-lg w-24 hover:bg-red-600 transition"
                 >
                   {isLogOutPending ? (
-                    <Loader width={30} height={30} color="orange" />
+                    <Loader width={20} height={20} color="orange" />
                   ) : (
                     "Logout"
                   )}

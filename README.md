@@ -2,6 +2,10 @@
 
 Welcome to the frontend of the URL Shortener project. This application allows users to create shortened URLs from long URLs and log in via Google authentication. You can also observe graphical analytics for better insights into your URLs, and how your created urls are performed.
 
+## WebSite Demo Video
+
+[Watch the video](https://youtu.be/CS1xJmIy184)
+
 ## Live Deployment
 
 **Deployed at:** [https://nextjs-us-data-analytics-front.onrender.com](https://nextjs-us-data-analytics-front.onrender.com)
