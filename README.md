@@ -4,7 +4,7 @@ Welcome to the frontend of the URL Shortener project. This application allows us
 
 ## WebSite Demo Video
 
-[Watch the video](https://youtu.be/CS1xJmIy184)
+[Watch the video](https://youtu.be/MDqx2yixKNM)
 
 ## Live Deployment
 
